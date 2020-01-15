@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+    <head>
+        <meta charset="UTF-8">
+        <title>map</title>
+        <link rel="stylesheet" href="style.css">
+        <script src="https://api-maps.yandex.ru/2.1/?apikey=c7544186-fcd7-4a87-a03e-1d3b6eda314d&load=package.full&lang=ru_RU" type="text/javascript"></script>
+    </head>
+
+    <body>
+        <div id="table-maps">
+            <div id="map"></div>
+            <div id="cvs">
+                <canvas id="canvas" width="600" height="400">
+                    отображение канвас не работает
+                </canvas>
+                <p>
+                    <input id="buttonPoint" type="button" value="точка">
+                    <input id="buttonLine" type="button" value="линия">
+                    <input id="buttonRectangle" type="button" value="четырёхуголник">
+                </p>
+            </div>
+        </div>
+        <!-- ------------include-js----------- -->
+        <script src="script.js"></script>
+    </body>
+
+</html>
