@@ -1,29 +1,46 @@
 <!DOCTYPE html>
 <html lang="ru">
+    
+<head>
+    <meta charset="UTF-8">
+    <title>map</title>
+    <link rel="stylesheet" href="./css/style.css">
+</head>
 
-    <head>
-        <meta charset="UTF-8">
-        <title>map</title>
-        <link rel="stylesheet" href="style.css">
-        <script src="https://api-maps.yandex.ru/2.1/?apikey=c7544186-fcd7-4a87-a03e-1d3b6eda314d&load=package.full&lang=ru_RU" type="text/javascript"></script>
-    </head>
-
-    <body>
-        <div id="table-maps">
-            <div id="map"></div>
-            <div id="cvs">
-                <canvas id="canvas" width="600" height="400">
-                    отображение канвас не работает
-                </canvas>
+<body>
+    <div id="map-frame">
+        <div id="map"></div>
+        <p>
+            <input id="point" type="button" value="точка">
+            <input id="line" type="button" value="линия">
+            <input id="arrow" type="button" value="стрелка">
+            <input id="broken_line" type="button" value="ломанная линия">
+            <input id="ok" type="button" value="OK" disabled="true">
+        </p>
+    </div>
+    <!-- Модальное окно -->
+    <div id="openModal" class="modalDialog">
+        <div>
+            <a href="#close" title="Закрыть" class="close">X</a>
+            <h3 style="line-height:0.1em">Создание пользовательского слоя</h3>
+            <hr style="line-height:0.1em">
+            <form id="newLayot" action="#" >
+                <p><label for="name">Имя:</label><input id="name" required pattern="^[А-Яа-яЁё\-]+$" autocomplete="off"></p>
                 <p>
-                    <input id="buttonPoint" type="button" value="точка">
-                    <input id="buttonLine" type="button" value="линия">
-                    <input id="buttonRectangle" type="button" value="четырёхуголник">
+                    <label for="type">Тип:</label>
+                    <select id="type">
+                        <option value="point">Точка</option>
+                        <option value="line">Линия</option>
+                        <option value="broken_line">Ломанная линия</option>
+                    </select>
                 </p>
-            </div>
+                <p>
+                    <input type="submit" value="Создать">
+                    <input type="reset" value="Очистить">
+                </p>
+            </form>
         </div>
-        <!-- ------------include-js----------- -->
-        <script src="script.js"></script>
-    </body>
-
+    </div>
+    <script src="./js/includeScripts.js"></script>
+</body>
 </html>
