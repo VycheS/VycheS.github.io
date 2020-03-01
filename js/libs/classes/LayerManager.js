@@ -1,4 +1,5 @@
 class LayerManager {
+    //TODO добавлять в данные слоёв не объекты а их параметры(координаты и опции)
     constructor(map, allLayot) {
         this._map = map;
         //хранит все слои

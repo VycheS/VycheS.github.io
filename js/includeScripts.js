@@ -5,7 +5,7 @@
 //подключение api карты
 addScripts('',['https://api-maps.yandex.ru/2.1/?apikey=c7544186-fcd7-4a87-a03e-1d3b6eda314d&load=package.full&lang=ru_RU'], {async: true})
 //подключение своих модулей карты
-.then(script => addScripts('./js/libs/map_modules/',['arrow.js',]))
+.then(script =>addScripts('./js/libs/map_modules/',['arrow.js',]))
 //подключение сторонних библиотек
 .then(script => addScripts('./js/vendor/',['lodash.min.js',]))
 /* Функция ymaps.ready() будет вызвана, когда загрузятся 

@@ -1,5 +1,14 @@
 class App {
     constructor() {
+        //закрываем всё на всякий случай
+        location.hash = '#close';
+        //добавление события к форме модального окна
+        let modalNewLayot = document.querySelector('#newLayot');
+        modalNewLayot.addEventListener('submit', function (e) {
+            e.preventDefault();
+            app.createLayer(this.name.value, this.type.value)
+            location.hash = '#close';
+        });
         // Создание карты.
         this._map = new ymaps.Map("map", {
             // Координаты центра карты: «широта, долгота».
@@ -9,7 +18,7 @@ class App {
             //включение или отключение элементов управления карты
             controls: ['zoomControl',/* 'typeSelector', */'fullscreenControl'],
             //включение или отключение способов взаимодействия с картой
-            behaviors: [] //напиши:'drag' чтобы перемещать левой кнопкой мыши
+            behaviors: ['drag', 'scrollZoom']
         });
         //хранит все слои
         this._allLayot = new Array;
@@ -17,17 +26,13 @@ class App {
         this.layerManager = new LayerManager(this._map, this._allLayot);
         //менеджер управления
         this.controlManager = new ControlManager(this._map, this._allLayot);
-        //добавление события к форме модального окна
-        document
-            .querySelector('#newLayot')
-            .setAttribute('onsubmit', 'app.createLayer(this.name.value, this.type.value)');
     }
 
-    createLayer(name, type){
-        let layot = this._allLayot.find(layot=>layot.name === name);
-        if(layot == undefined){
+    createLayer(name, type) {
+        let layot = this._allLayot.find(layot => layot.name === name);
+        if (layot == undefined) {
             this.layerManager.add(name, type);
-            this.controlManager.addItemToListBoxes(name);
+            this.controlManager.addItemToListBoxes(name, type);
             this.controlManager.selectEditItem(name);
             this.controlManager.highlightColor(name);
         } else {
@@ -36,10 +41,10 @@ class App {
         }
     }
     //test
-    output(){
+    output() {
         let it = this._map.geoObjects.getIterator();
         let obj;
-        while((obj = it.getNext()) != it.STOP_ITERATION){
+        while ((obj = it.getNext()) != it.STOP_ITERATION) {
             console.log(obj);
         }
     }

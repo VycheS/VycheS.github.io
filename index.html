@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="ru">
-    
+
 <head>
     <meta charset="UTF-8">
     <title>map</title>
@@ -10,13 +10,14 @@
 <body>
     <div id="map-frame">
         <div id="map"></div>
-        <p>
+        <br>
+        <div>
             <input id="point" type="button" value="точка">
             <input id="line" type="button" value="линия">
             <input id="arrow" type="button" value="стрелка">
             <input id="broken_line" type="button" value="ломанная линия">
             <input id="ok" type="button" value="OK" disabled="true">
-        </p>
+        </div>
     </div>
     <!-- Модальное окно -->
     <div id="openModal" class="modalDialog">
@@ -24,8 +25,12 @@
             <a href="#close" title="Закрыть" class="close">X</a>
             <h3 style="line-height:0.1em">Создание пользовательского слоя</h3>
             <hr style="line-height:0.1em">
-            <form id="newLayot" action="#" >
-                <p><label for="name">Имя:</label><input id="name" required pattern="^[А-Яа-яЁё\-]+$" autocomplete="off"></p>
+            <form id="newLayot" action="#">
+                <p>
+                    <label for="name">Имя:</label>
+                    <input id="name" required pattern="^([A-Za-z]+|[А-Яа-яЁё\-]+)$" autocomplete="off"
+                        title="ввод только кириллицы либо латиницы">
+                </p>
                 <p>
                     <label for="type">Тип:</label>
                     <select id="type">
@@ -41,6 +46,21 @@
             </form>
         </div>
     </div>
+    <!-- окна редактирования геообъектов -->
+    <form id="menuPoint" class="modalMenu" action="#">
+        <a href="#close" title="Закрыть" class="close">X</a>
+        <li>Название: <br> <input id="iconText" autocomplete="off"/></li>
+        <li>Подсказка: <br> <input id="hintText" autocomplete="off"/></li>
+        <li>Балун: <br> <input id="balloonText" autocomplete="off"/></li>
+        <li align="center"><input type="submit" value="Сохранить"><input type="reset" value="Очистить"></li>
+    </form>
+    <form id="menuLine" class="modalMenu" action="#">
+        <a href="#close" title="Закрыть" class="close">X</a>
+        <li>Подсказка: <br> <input id="hintText" autocomplete="off"/></li>
+        <li>Балун: <br> <input id="balloonText" autocomplete="off"/></li>
+        <li align="center"><input type="submit" value="Сохранить"><input type="reset" value="Очистить"></li>
+    </form>
     <script src="./js/includeScripts.js"></script>
 </body>
+
 </html>

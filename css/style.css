@@ -1,12 +1,26 @@
-#map-frame{
+
+
+
+#map {
+    width: 80%;
+    height: 100%;
     margin: 0 auto;
 }
 
-#map{
-    width: 600px;
-    height: 400px;
+html, body{
+    width: 90;
+    height: 90%;
+    margin: auto;
+    padding: 0;
+    font-family: Arial;
+    font-size: 14px;
 }
 
+#map-frame{
+    text-align: center;
+    width: 90;
+    height: 95%;
+}
 
 /* ------------- свойства модального окна ------------- */
 .modalDialog {
@@ -61,3 +75,36 @@
 
 /* кнопка меняет цвет при наведении */
 .close:hover { background: #ff0000; }
+
+/* меню настройки геообъекта */
+
+.modalMenu {
+    margin: 0;
+    padding: 0;
+    position: fixed;
+    list-style: none;
+    background: #ffffff;
+    border: 1px solid #000000;
+    border-radius: 1px;
+    z-index: 99999;
+    -webkit-transition: opacity 400ms ease-in;
+    -moz-transition: opacity 400ms ease-in;
+    transition: opacity 400ms ease-in;
+    display: none;
+    pointer-events: none;
+}
+.modalMenu:target {
+    display: block;
+    pointer-events: auto;
+}
+.modalMenu li {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    cursor: pointer;
+    font-size: 15px;
+}
+/* выделение цветом при наведении */
+/* .modalMenu li:hover {
+    background: #333333;
+} */
