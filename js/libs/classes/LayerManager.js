@@ -1,66 +1,44 @@
 class LayerManager {
-    //TODO добавлять в данные слоёв не объекты а их параметры(координаты и опции)
-    constructor(map, allLayot) {
+    constructor(map) {
         this._map = map;
         //хранит все слои
-        this._allLayot = allLayot;
+        this._layersStorage = {};
     }
 
     add(name, type) {
-        if ((typeof (name) == 'string') && (type == 'point' || type == 'line' || type == 'broken_line')) {
-            this._allLayot.push({
-                name: name,
-                type: type,
-                data: new Array
-            });
+        if (name in this._layersStorage) {
+            return false;
         } else {
-            console.log(new Error(`Нет возможности создать слой с такими параметрами (${name}, ${type})`));
-        }
-
-    }
-
-    remove(name) {
-        if (this._allLayot.length != 0) {
-            //поиск елемента, если он существует то возвращается в переменную, если нет то он undefined
-            let layot = this._allLayot.find(layot => layot.name === name);
-            if (layot != undefined) {
-                //при помощи indexOf получаем индекс элемента и удаляем в последующем
-                this._allLayot.splice(this._allLayot.indexOf(layot), 1);
+            if ((typeof (name) == 'string') && (type == 'point' || type == 'line' || type == 'broken_line')) {
+                this._layersStorage[name] = new LayerGeoObj(this._map, name, type);
+                return true;
             } else {
-                console.log(new Error(`Такого слоя не существует`));
+                console.log(new Error(`Нет возможности создать слой с такими параметрами (${name}, ${type})`));
             }
-        } else {
-            console.log(new Error(`Не задан ни один слой`));
         }
     }
 
     on(name) {
-        if (this._allLayot.length != 0) {
-            //поиск елемента, если он существует то возвращается в переменную, если нет то он undefined
-            let layot = this._allLayot.find(layot => layot.name === name);
-            if (layot != undefined) {
-                //добавляем пообъектно на карту
-                layot.data.forEach(obj => this._map.geoObjects.add(obj));
-                // layot.data.forEach(obj => console.log(obj));
-            } else {
-                console.log(new Error(`Такого слоя не существует`));
-            }
+        if (name in this._layersStorage) {
+            this._layersStorage[name].on();
         } else {
-            console.log(new Error(`Не задан ни один слой`));
+            console.log(new Error(`Нет такого слоя или не задан вообще ни один`));
         }
     }
 
     off(name) {
-        let it = this._map.geoObjects.getIterator();
-        let geoObj;
-        let rmList = new Array();
-        while ((geoObj = it.getNext()) != it.STOP_ITERATION) {
-            if (geoObj.layot == name) {
-                rmList.push(geoObj);
-            }
+        if (name in this._layersStorage) {
+            this._layersStorage[name].off();
+        } else {
+            console.log(new Error(`Нет такого слоя или не задан вообще ни один`));
         }
-        while (rmList.length != 0) {
-            this._map.geoObjects.remove(rmList.pop());
+    }
+
+    getLayer(name){
+        if (name in this._layersStorage) {
+            return this._layersStorage[name];
+        } else {
+            console.error(`Возвращаемый слой:${name} отсутсвует`);
         }
     }
 }
